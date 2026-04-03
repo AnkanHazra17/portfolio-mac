@@ -29,9 +29,9 @@ const setUpTextHover = (
   >,
   type: "subtitle" | "title",
 ) => {
-  if (!container || !container.current) return;
+  if (!container || !container.current) return () => {};
+  const element = container.current;
   const letters = container.current.querySelectorAll<HTMLSpanElement>("span");
-
   const { min, max, default: baseWeight } = FONT_WEIGHTS[type];
 
   const animateLetter = (
@@ -64,12 +64,12 @@ const setUpTextHover = (
   const handleMouseLeave = () =>
     letters.forEach((letter) => animateLetter(letter, baseWeight, 0.3));
 
-  container.current.addEventListener("mousemove", handleMouseMove);
-  container.current.addEventListener("mouseleave", handleMouseLeave);
+  element.addEventListener("mousemove", handleMouseMove);
+  element.addEventListener("mouseleave", handleMouseLeave);
 
   return () => {
-    container.current?.removeEventListener("mousemove", handleMouseMove);
-    container.current?.removeEventListener("mouseleave", handleMouseLeave);
+    element.removeEventListener("mousemove", handleMouseMove);
+    element.removeEventListener("mouseleave", handleMouseLeave);
   };
 };
 
@@ -81,8 +81,8 @@ function WelcomeScreen() {
     const titleHover = setUpTextHover(titleRef, "title");
     const subtitleHover = setUpTextHover(subtitleRef, "subtitle");
     return () => {
-      titleHover?.();
-      subtitleHover?.();
+      titleHover();
+      subtitleHover();
     };
   }, [titleRef, subtitleRef]);
   return (

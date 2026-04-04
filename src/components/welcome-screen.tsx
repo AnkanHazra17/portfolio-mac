@@ -95,7 +95,7 @@ function WelcomeScreen() {
         )}
       </p>
       <h1 ref={titleRef} className="mt-7">
-        {renderText("portfolio", "text-9xl italic font-georama")}
+        {renderText("portfolio.", "text-9xl italic font-georama")}
       </h1>
 
       <div className="small-screen">

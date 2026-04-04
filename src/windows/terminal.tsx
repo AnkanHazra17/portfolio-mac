@@ -36,7 +36,7 @@ function Terminal() {
 
         <div className="footnote">
             <p>
-                <CheckIcon size={20} /> 6 of 6 stacks loaded successfully (100%)
+                <CheckIcon size={20} /> {TECHSTACKS.length} of {TECHSTACKS.length} stacks loaded successfully (100%)
             </p>
             <p className="text-black">
                 <FlagIcon size={15} fill="black" /> Render time: 0.023s

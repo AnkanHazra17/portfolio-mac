@@ -56,13 +56,10 @@ function Dock() {
     });
 
     const animateIcons = (mouseX: number) => {
-      const { left } = dock.getBoundingClientRect();
-
-      icons.forEach((icon) => {
-        const { left: iconLeft, width } = icon.getBoundingClientRect();
-        const center = iconLeft - left + width / 2;
+      icons.forEach((icon, i) => {
+        const center = iconCenters[i];
+        if (center === undefined) return;
         const distance = Math.abs(mouseX - center);
-
         const intensity = Math.exp(-(distance ** 2) / 2000);
         const qt = quickTos.get(icon);
         if (!qt) return;
@@ -72,8 +69,7 @@ function Dock() {
     };
 
     const handleMouseMove = (e: MouseEvent) => {
-      const { left } = dock.getBoundingClientRect();
-      const mouseX = e.clientX - left;
+      const mouseX = e.clientX - dock.getBoundingClientRect().left;
       animateIcons(mouseX);
     };
 

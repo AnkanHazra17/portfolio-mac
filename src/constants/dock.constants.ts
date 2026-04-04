@@ -1,4 +1,6 @@
-export const DOCK_APPS = [
+import type { DockAppsType } from "@/types/dock";
+
+export const DOCK_APPS: DockAppsType = [
     {
       id: "finder",
       name: "Portfolio", // was "Finder"

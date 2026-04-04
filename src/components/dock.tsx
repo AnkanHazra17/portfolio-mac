@@ -7,13 +7,28 @@ import useWindow from "@/store/window";
 import type { DockAppType } from "@/types/dock";
 
 function Dock() {
-  const { openWindow, closeWindow, windows } = useWindow();
+  const openWindow = useWindow((s) => s.openWindow);
+  const closeWindow = useWindow((s) => s.closeWindow);
   const dockRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
     const dock = dockRef.current;
     if (!dock) return;
-    const icons = dock.querySelectorAll<HTMLButtonElement>(".dock-icon");
+    const icons = Array.from(
+      dock.querySelectorAll<HTMLButtonElement>(".dock-icon"),
+    );
+
+    let iconCenters: number[] = [];
+
+    const measureIconCenters = () => {
+      const dockRect = dock.getBoundingClientRect();
+      iconCenters = icons.map((icon) => {
+        const r = icon.getBoundingClientRect();
+        return r.left - dockRect.left + r.width / 2;
+      });
+    };
+
+    measureIconCenters();
 
     const quickTos = new Map<
       HTMLButtonElement,
@@ -71,9 +86,13 @@ function Dock() {
       });
     };
 
+    const handleResize = () => measureIconCenters();
+
+    window.addEventListener("resize", handleResize);
     dock.addEventListener("mousemove", handleMouseMove);
     dock.addEventListener("mouseleave", resetIcons);
     return () => {
+      window.removeEventListener("resize", handleResize);
       dock.removeEventListener("mousemove", handleMouseMove);
       dock.removeEventListener("mouseleave", resetIcons);
     };
@@ -82,9 +101,9 @@ function Dock() {
   const toggleApp = (app: DockAppType) => {
     if (!app.canOpen) return;
     if (app.id === "trash") return;
-    const window = windows[app.id];
+    const win = useWindow.getState().windows[app.id];
 
-    if (window.isOpen) {
+    if (win.isOpen) {
       closeWindow(app.id);
     } else {
       openWindow(app.id);

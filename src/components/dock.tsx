@@ -7,7 +7,7 @@ import useWindow from "@/store/window";
 import type { DockAppType } from "@/types/dock";
 
 function Dock() {
-  const { openWindow, closeWindow, focusWindow, windows } = useWindow();
+  const { openWindow, closeWindow, windows } = useWindow();
   const dockRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {

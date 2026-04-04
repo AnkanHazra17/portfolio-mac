@@ -1,10 +1,10 @@
 import type { WindowKeyType } from "./window";
 
-type DockAppType = {
+export type DockAppType = {
     id: WindowKeyType | "trash";
     name: string;
     icon: string;
     canOpen: boolean;
 }
 
-type DockAppsType = DockAppType[];
+export type DockAppsType = DockAppType[];

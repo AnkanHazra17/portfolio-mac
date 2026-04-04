@@ -1,4 +1,4 @@
-import { INITIAL_Z_INDEX, WINDOW_CONFIG } from "@/constants/wondow.constants";
+import { INITIAL_Z_INDEX, WINDOW_CONFIG } from "@/constants/window.constants";
 import type { WindowConfigType, WindowKeyType } from "@/types/window";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
@@ -17,18 +17,18 @@ const useWindow = create<WindowStore>()(immer((set) => (
         windows: WINDOW_CONFIG,
         nextZIndex: INITIAL_Z_INDEX + 1,
 
-        openWindow: (windowKey, data = null) => set((state) => {
+        openWindow: (windowKey, data) => set((state) => {
             const window = state.windows[windowKey];
             window.isOpen = true;
             window.zIndex = state.nextZIndex;
-            window.data = data ?? window.data;
+            window.data = data === undefined ? window.data : data;
             state.nextZIndex++;
         }),
         closeWindow: (windowKey) => set((state) => {
             const window = state.windows[windowKey];
             window.isOpen = false;
             window.zIndex = INITIAL_Z_INDEX;
-            window.data = null;
+            window.data = undefined;
         }),
         focusWindow: (windowKey) => set((state) => {
             const window = state.windows[windowKey];

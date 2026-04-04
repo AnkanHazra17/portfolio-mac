@@ -1,7 +1,7 @@
-import type { WINDOW_CONFIG } from "@/constants/wondow.constants";
+import type { WINDOW_CONFIG } from "@/constants/window.constants";
 
-type WindowKeyType = keyof typeof WINDOW_CONFIG;
+export type WindowKeyType = keyof typeof WINDOW_CONFIG;
 
-type WindowConfigType = typeof WINDOW_CONFIG;
+export type WindowConfigType = typeof WINDOW_CONFIG;
 
-type WindowType = WindowConfigType[WindowKeyType];
+export type WindowType = WindowConfigType[WindowKeyType];

@@ -1,5 +1,6 @@
-import NavBar from "./components/nav-bar"
-import WelcomeScreen from "./components/welcome-screen"
+import NavBar from "@/components/nav-bar"
+import WelcomeScreen from "@/components/welcome-screen"
+import Dock from "@/components/dock"
 
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
     <main>
       <NavBar />
       <WelcomeScreen />
+      <Dock />
     </main>
   )
 }

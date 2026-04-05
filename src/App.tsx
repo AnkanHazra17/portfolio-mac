@@ -4,6 +4,8 @@ import Dock from "@/components/dock"
 import { Draggable } from "gsap/dist/Draggable";
 import gsap from "gsap"
 import Terminal from "@/windows/terminal";
+import Resume from "@/windows/resume";
+import Safari from "@/windows/safari";
 
 gsap.registerPlugin(Draggable);
 
@@ -15,6 +17,8 @@ function App() {
       <Dock />
 
       <Terminal />
+      <Resume />
+      <Safari />
     </main>
   )
 }

@@ -1,7 +1,9 @@
 import dayjs from "dayjs";
 import { NAV_ICONS, NAV_LINKS } from "@/constants/nav.constants";
+import useWindow from "@/store/window";
 
 function NavBar() {
+  const openWindow = useWindow((s) => s.openWindow);
   return (
     <nav>
       <div>
@@ -10,7 +12,13 @@ function NavBar() {
         <ul>
           {NAV_LINKS.map((link) => (
             <li key={link.id}>
-              <p>{link.name}</p>
+              <button
+                type="button"
+                aria-label={link.name}
+                onClick={() => openWindow(link.type)}
+              >
+                <p>{link.name}</p>
+              </button>
             </li>
           ))}
         </ul>

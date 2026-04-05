@@ -11,8 +11,14 @@ function NavBar() {
         <p className="font-bold">Ankan</p>
         <ul>
           {NAV_LINKS.map((link) => (
-            <li key={link.id} onClick={() => openWindow(link.type)}>
-              <p>{link.name}</p>
+            <li key={link.id}>
+              <button
+                type="button"
+                aria-label={link.name}
+                onClick={() => openWindow(link.type)}
+              >
+                <p>{link.name}</p>
+              </button>
             </li>
           ))}
         </ul>
